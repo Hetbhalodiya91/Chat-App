@@ -1,22 +1,30 @@
 import React from "react";
 import backImage from "../assets/back.jpg";
+import { IoSend } from "react-icons/io5";
+import { MdAttachFile } from "react-icons/md";
+import { useState, useRef } from "react";
+
+
+
 
 
 const ChatPage = () => {
-  const messages = [
-    { id: 1, user: "Amit Kumar", text: "Hi Het!", isMe: false },
-    { id: 2, user: "Het Bhalodiya", text: "Hello!", isMe: true },
-    { id: 3, user: "Amit Kumar", text: "How are you?", isMe: false },
-    { id: 4, user: "Het Bhalodiya", text: "I am good 😄", isMe: true },
-  ];
+
+    const [roomId, setRoomId] = useState("");
+    const [input, setInput] = useState("");
+    const [messages, setMessages] = useState([]);
+    const inputRef = useRef(null);
+    const chatBoxRef = useRef(null);
+    const [stompClient, setStompClient] = useState(null);
+
 
   return (
-    <div className="h-screen bg-gray-100 dark:bg-emerald-100 flex justify-center">
+    <div className="h-screen bg-gray-100 dark:bg-emerald-50 flex justify-center">
     <div className="h-screen   w-4xl  flex flex-col bg-gray-100 dark:bg-slate-900" 
      style={{ backgroundImage: `url(${backImage})` }}>
 
       {/* 🔝 Top Navbar */}
-      <div className="bg-slate-700 dark:bg-slate-800 mt-3 text-white">
+      <div className="bg-slate-700 dark:bg-slate-800 pt-3 text-white">
         <div className="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center">
           <div className="font-semibold">
             Room: 12345
@@ -40,7 +48,7 @@ const ChatPage = () => {
             msg.isMe ? (
               // 👉 My Message (Right Side)
               <div key={msg.id} className="flex justify-end">
-                <div className="bg-emerald-400 text-white px-4 py-2 rounded-xl max-w-xs shadow">
+                <div className=" dark:bg-gray-500  bg-emerald-400 text-white px-4 py-2 rounded-xl max-w-xs shadow">
                   <p className="text-sm font-semibold">
                     {msg.user}
                   </p>
@@ -55,7 +63,7 @@ const ChatPage = () => {
                   alt="avatar"
                   className="w-8 h-8 rounded-full"
                 />
-                <div className="bg-white dark:bg-slate-700 text-gray-800 dark:text-white px-4 py-2 rounded-xl max-w-xs shadow">
+                <div className="bg-gray-300 dark:bg-slate-700 text-gray-800 dark:text-white px-4 py-2 rounded-xl max-w-xs shadow">
                   <p className="text-sm font-semibold">
                     {msg.user}
                   </p>
@@ -69,7 +77,7 @@ const ChatPage = () => {
       </div>
 
       {/* 📨 Bottom Input Section */}
-      <div className="bg-slate-700 dark:bg-slate-800 mb-5 ">
+      <div className="bg-slate-700 dark:bg-slate-800 pb-5 ">
         <div className="max-w-4xl mx-auto px-4 py-3 flex items-center gap-3">
 
           <input
@@ -77,9 +85,12 @@ const ChatPage = () => {
             placeholder="Type a message..."
             className="flex-1 px-4 py-2 rounded-lg bg-slate-600 text-white focus:outline-none"
           />
+          <button className="p-2 rounded-full bg-fuchsia-500  hover:bg-fuchsia-300">
+              <MdAttachFile size={20} />
+          </button>
 
           <button className="bg-blue-500 hover:bg-blue-600 px-5 py-2 rounded-lg text-white transition">
-            Send
+            <IoSend/>
           </button>
 
         </div>
