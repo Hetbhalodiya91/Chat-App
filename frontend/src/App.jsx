@@ -1,16 +1,14 @@
-import { useState } from 'react'
-import './App.css'
-import toast from 'react-hot-toast'
-import JoinCreateChat from './components/JoinCreateChat'
+window.global = window;
+
+import "./App.css";
+import JoinCreateChat from "./components/JoinCreateChat";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-     <JoinCreateChat/>
+      <JoinCreateChat />
     </>
-  )
+  );
 }
 
 export default App

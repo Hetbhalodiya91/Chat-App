@@ -5,6 +5,8 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ChatApp</title>
+    <!-- Polyfill for sockjs-client: Node's "global" is undefined in browser -->
+    <script>var global = window;</script>
   </head>
   <body class="h-screen bg-gray-300 text-gray-900 dark:bg-gray-950 dark:text-gray-300">
     <div id="root"></div>

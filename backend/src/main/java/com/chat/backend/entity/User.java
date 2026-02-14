@@ -5,23 +5,21 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-@Document(collection = "rooms")
+@Document(collection = "users")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Room {
+public class User {
 
     @Id
     private String id;
-    private String roomId;
-    private List<Message> messages = new ArrayList<>();
-    private Set<String> memberIds = new HashSet<>();
+    @Indexed(unique = true)
+    private String username;
+    @Indexed(unique = true)
+    private String email;
+    private String password;
 }

@@ -6,16 +6,17 @@ import com.chat.backend.entity.Room;
 import com.chat.backend.repository.RoomRepository;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.time.LocalDateTime;
 
 @Controller
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("http://localhost:5173")
 public class ChatController {
-    private RoomRepository roomRepository;
+    private final RoomRepository roomRepository;
 
     public ChatController(RoomRepository roomRepository) {
         this.roomRepository = roomRepository;
@@ -24,8 +25,8 @@ public class ChatController {
     @MessageMapping("/sendMessage/{roomId}")
     @SendTo("/topic/room/{roomId}")
     public Message sendMessage(
-            @DestinationVariable String roomId
-            ,@RequestBody MessageRequest messageRequest){
+            @DestinationVariable String roomId,
+            @Payload MessageRequest messageRequest) {
 
         Room room = roomRepository.findByRoomId(messageRequest.getRoomId());
         Message message = new Message();
